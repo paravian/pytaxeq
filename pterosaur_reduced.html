@@ -1,0 +1,605 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PyTaxEq results</title>
+    <link rel="stylesheet" type="text/css" href="/home/ranardath/Python/pytaxeq/templates/uikit.gradient.css" />
+    </head>
+        
+    <body>
+        <div class="uk-container">
+        <div class="uk-width-1-2">
+        <h1>Data from <i>Modified Matrix</i></h1>
+        <p>Checked for equivalence by PyTaxEq</p>
+        
+        <h2>Details of input file</h2>
+        <p>
+            Number of taxa: <b>7</b>
+            <br>
+            Number of characters: <b>7</b>
+        </p>
+        
+        <h2>Original data matrix</h2>
+        
+        
+    <table class="uk-table uk-table-striped uk-table-condensed">
+        <tr>
+            <th>Taxon</th>
+            <th>Character states</th>
+        </tr>
+        
+            <tr>
+                <td>Rhamphorynchus</td>
+                <td>0 0 0 0 0 0 0 0 0 0 0 0 0 0</td>
+            </tr>
+        
+            <tr>
+                <td>Pteranodon</td>
+                <td>1 1 1 1 0 1 1 1 2 1 2 1 0 0</td>
+            </tr>
+        
+            <tr>
+                <td>S._brasiliensis_(paratype)</td>
+                <td>? 1 1 0 1 ? ? ? ? ? ? ? ? ?</td>
+            </tr>
+        
+            <tr>
+                <td>Quetzalcoatlus</td>
+                <td>1 1 1 2 2 1 1 1 2 0 ? 0 0 0</td>
+            </tr>
+        
+            <tr>
+                <td>Pteranodon_oregonensis</td>
+                <td>? ? ? ? ? ? ? ? ? 0 1 0 ? ?</td>
+            </tr>
+        
+            <tr>
+                <td>Dsungaripterus</td>
+                <td>1 1 0 1 0 1 1 1 1 0 ? 0 1 0</td>
+            </tr>
+        
+            <tr>
+                <td>Nyctosaurus_gracilis</td>
+                <td>1 1 1 1 0 1 0 1 0 2 1 0 0 1</td>
+            </tr>
+        
+    </table>
+
+
+        
+    
+    
+    
+        
+        
+        
+    
+    
+    <h2>Statistics on missing data</h2>
+    
+    
+    
+        <ul>
+        
+            <li>
+                
+                    <b>6</b> characters have 
+                
+                
+                    <b>1</b> missing entry
+                
+            </li>
+        
+            <li>
+                
+                    <b>7</b> characters have 
+                
+                
+                    <b>2</b> missing entries
+                
+            </li>
+        
+            <li>
+                
+                    <b>1</b> character has 
+                
+                
+                    <b>3</b> missing entries
+                
+            </li>
+        
+        </ul>
+        
+    <p class="uk-margin-bottom-remove">
+        
+            
+        
+        Total number of entries: <b>98</b>
+        <br>
+        Total number of missing entries: <b>23 (23.47%)</b>
+        <br>
+        Mean number of missing entries:
+    </p>
+    <ul class="uk-margin-top-remove">
+        <li><b>3.286 per taxon</b></li>
+        <li><b>1.643 per character</b></li>
+    </ul>
+    
+    <h3>Statistics on invalid comparisons due to missing  data</h3>
+    
+    <p>
+        Total number of comparisons: <b>588</b>
+        <br>
+        Total number of invalid comparisons: <b>
+        
+            256 (43.54%)
+        
+        </b>
+    </p>
+    
+    
+
+        
+        
+    <h2>Equivalents considering missing entries only</h2>
+    
+    
+        
+        
+    
+    
+    <table class="uk-table uk-table-striped uk-table-condensed">
+        <tr>
+            <th>Taxon</th>
+            <th>Missing characters</th>
+            <th>Equivalents</th>
+        </tr>
+        
+        
+            
+            <tr>
+                <td>Rhamphorynchus</td>
+                <td>0 (0.00%)</td>
+                <td>
+                    
+                        Shows no equivalence
+                    
+                </td>
+            </tr>
+        
+            
+            <tr>
+                <td>Pteranodon</td>
+                <td>0 (0.00%)</td>
+                <td>
+                    
+                        Shows no equivalence
+                    
+                </td>
+            </tr>
+        
+            
+            <tr>
+                <td>S._brasiliensis_(paratype)</td>
+                <td>10 (71.43%)</td>
+                <td>
+                    
+                        
+                            Pteranodon_oregonensis (D)
+                        
+                    
+                </td>
+            </tr>
+        
+            
+            <tr>
+                <td>Quetzalcoatlus</td>
+                <td>1 (7.14%)</td>
+                <td>
+                    
+                        
+                            Pteranodon_oregonensis (D)
+                        
+                    
+                </td>
+            </tr>
+        
+            
+            <tr>
+                <td>Pteranodon_oregonensis</td>
+                <td>11 (78.57%)</td>
+                <td>
+                    
+                        
+                            S._brasiliensis_(paratype) (D)
+                        
+                            Quetzalcoatlus (D)
+                        
+                            Dsungaripterus (D)
+                        
+                    
+                </td>
+            </tr>
+        
+            
+            <tr>
+                <td>Dsungaripterus</td>
+                <td>1 (7.14%)</td>
+                <td>
+                    
+                        
+                            Pteranodon_oregonensis (D)
+                        
+                    
+                </td>
+            </tr>
+        
+            
+            <tr>
+                <td>Nyctosaurus_gracilis</td>
+                <td>0 (0.00%)</td>
+                <td>
+                    
+                        Shows no equivalence
+                    
+                </td>
+            </tr>
+        
+    </table>
+
+        
+        <h2>Recoding uninformative data</h2>
+        
+        <h3>Uninformative codings</h3>
+        
+        
+            <table class="uk-table uk-table-striped uk-table-condensed">
+                <tr>
+                    <th>Taxon</th>
+                    <th>Character</th>
+                    <th>State</th>
+                </tr>
+                
+                    <tr>
+                        <td>Quetzalcoatlus</td>
+                        <td>4</td>
+                        <td>State 2 uninformative, changed to
+                            ?
+                        </td>
+                    </tr>
+                
+            </table>
+        
+        
+        
+            <h3>Characters with no parsimony-informative data (replaced with '?')</h3>
+            
+            <p>
+            1, 2, 5, 6, 8, 10, 11, 12, 13, 14
+            </p>
+        
+        
+        <h2>Modified data matrix</h2>
+        
+        
+    <table class="uk-table uk-table-striped uk-table-condensed">
+        <tr>
+            <th>Taxon</th>
+            <th>Character states</th>
+        </tr>
+        
+            <tr>
+                <td>Rhamphorynchus</td>
+                <td>? ? 0 0 ? ? 0 ? 0 ? ? ? ? ?</td>
+            </tr>
+        
+            <tr>
+                <td>Pteranodon</td>
+                <td>? ? 1 1 ? ? 1 ? 2 ? ? ? ? ?</td>
+            </tr>
+        
+            <tr>
+                <td>S._brasiliensis_(paratype)</td>
+                <td>? ? 1 0 ? ? ? ? ? ? ? ? ? ?</td>
+            </tr>
+        
+            <tr>
+                <td>Quetzalcoatlus</td>
+                <td>? ? 1 ? ? ? 1 ? 2 ? ? ? ? ?</td>
+            </tr>
+        
+            <tr>
+                <td>Pteranodon_oregonensis</td>
+                <td>? ? ? ? ? ? ? ? ? ? ? ? ? ?</td>
+            </tr>
+        
+            <tr>
+                <td>Dsungaripterus</td>
+                <td>? ? 0 1 ? ? 1 ? 1 ? ? ? ? ?</td>
+            </tr>
+        
+            <tr>
+                <td>Nyctosaurus_gracilis</td>
+                <td>? ? 1 1 ? ? 0 ? 0 ? ? ? ? ?</td>
+            </tr>
+        
+    </table>
+
+        
+        
+            
+    
+    
+    
+        
+        
+        
+        
+    
+    
+    <h2>Statistics on missing data</h2>
+    
+    
+        <ul>
+        
+            <li>
+                
+                    <b>1</b> character has 
+                
+                
+                    <b>4</b> uninformative entries
+                
+            </li>
+        
+            <li>
+                
+                    <b>5</b> characters have 
+                
+                
+                    <b>5</b> uninformative entries
+                
+            </li>
+        
+            <li>
+                
+                    <b>4</b> characters have 
+                
+                
+                    <b>6</b> uninformative entries
+                
+            </li>
+        
+        </ul>
+        
+    <p class="uk-margin-bottom-remove">
+        
+            
+        
+        Total number of entries: <b>98</b>
+        <br>
+        Total number of uninformative entries: <b>54 (55.10%)</b>
+        <br>
+        Mean number of uninformative entries:
+    </p>
+    <ul class="uk-margin-top-remove">
+        <li><b>7.714 per taxon</b></li>
+        <li><b>3.857 per character</b></li>
+    </ul>
+    
+    <h3>Statistics on invalid comparisons due to uninformative data</h3>
+    
+    <p>
+        Total number of comparisons: <b>588</b>
+        <br>
+        Total number of invalid comparisons: <b>
+        
+            242 (41.16%)
+        
+        </b>
+    </p>
+    
+    
+        <h3>Combined statistics on missing and uninformative data</h3>
+        
+        <p class="uk-margin-bottom-remove">
+            Total number of entries: <b>98</b>
+            <br>
+            Total number of missing and uninformative entries: <b>77 (78.57%)</b>
+            <br>
+            Mean number of missing and uninformative entries:
+        </p>
+        <ul class="uk-margin-top-remove">
+            <li><b>11.0 per taxon</b></li>
+            <li><b>5.5 per character</b></li>
+        </ul>
+        <p>
+            Total number of comparisons: <b>588</b>
+            <br>
+            Total number of invalid comparisons: <b>498 (84.69%)</b>
+            <br>
+        </p>
+    
+
+            
+            
+    <h2>Equivalents considering missing  <i>and</i> uninformative entries</h2>
+    
+    
+        
+        
+    
+    
+    <table class="uk-table uk-table-striped uk-table-condensed">
+        <tr>
+            <th>Taxon</th>
+            <th>Missing characters</th>
+            <th>Equivalents</th>
+        </tr>
+        
+        
+            
+            <tr>
+                <td>Rhamphorynchus</td>
+                <td>10 (71.43%)</td>
+                <td>
+                    
+                        
+                            Pteranodon_oregonensis (C!)
+                        
+                    
+                </td>
+            </tr>
+        
+            
+            <tr>
+                <td>Pteranodon</td>
+                <td>10 (71.43%)</td>
+                <td>
+                    
+                        
+                            Quetzalcoatlus (C*)
+                        
+                            Pteranodon_oregonensis (C!)
+                        
+                    
+                </td>
+            </tr>
+        
+            
+            <tr>
+                <td>S._brasiliensis_(paratype)</td>
+                <td>12 (85.71%)</td>
+                <td>
+                    
+                        
+                            Quetzalcoatlus (D)
+                        
+                            Pteranodon_oregonensis (C!)
+                        
+                    
+                </td>
+            </tr>
+        
+            
+            <tr>
+                <td>Quetzalcoatlus</td>
+                <td>11 (78.57%)</td>
+                <td>
+                    
+                        
+                            Pteranodon (E)
+                        
+                            S._brasiliensis_(paratype) (D)
+                        
+                            Pteranodon_oregonensis (C!)
+                        
+                    
+                </td>
+            </tr>
+        
+            
+            <tr>
+                <td>Pteranodon_oregonensis</td>
+                <td>14 (100.00%)</td>
+                <td>
+                    
+                        
+                            Rhamphorynchus (E)
+                        
+                            Pteranodon (E)
+                        
+                            S._brasiliensis_(paratype) (E)
+                        
+                            Quetzalcoatlus (E)
+                        
+                            Dsungaripterus (E)
+                        
+                            Nyctosaurus_gracilis (E)
+                        
+                    
+                </td>
+            </tr>
+        
+            
+            <tr>
+                <td>Dsungaripterus</td>
+                <td>10 (71.43%)</td>
+                <td>
+                    
+                        
+                            Pteranodon_oregonensis (C!)
+                        
+                    
+                </td>
+            </tr>
+        
+            
+            <tr>
+                <td>Nyctosaurus_gracilis</td>
+                <td>10 (71.43%)</td>
+                <td>
+                    
+                        
+                            Pteranodon_oregonensis (C!)
+                        
+                    
+                </td>
+            </tr>
+        
+    </table>
+
+        
+        
+        <h2>Key to taxonomic equivalence</h2>
+        
+        <h3>Equivalence scores</h3>
+        
+        <dl class="uk-description-list-horizontal">
+            <dt>A</dt>
+            <dd>Actual equivalents (symmetric)<br>Equivalent can be safely deleted if Index is retained</dd>
+            <dt>B</dt>
+            <dd>Potential equivalents (symmetric)<br>Equivalent can be safely deleted if Index is retained</dd>
+            <dt>C</dt>
+            <dd>Potential equivalents (asymmetric all one way)<br>Equivalent can be safely deleted if Index is retained</dd>
+            <dt>D</dt>
+            <dd>Potential equivalents (asymmetric both ways)<br>Cannot be safely deleted</dd>
+            <dt>E</dt>
+            <dd>Potential equivalents (asymmetric all one way)<br>Index can be safely deleted if equivalent is retained</dd>
+        </dl>
+        
+        <h3>Suffixes</h3>
+        
+        <dl class="uk-description-list-horizontal">
+            <dt>*</dt>
+            <dd>Equivalent taxon must originate from same node as Index taxon in any MPT (assuming no arbitrary resolutions)</dd>
+            <dt>!</dt><dd>Equivalent taxon has no informative data</dd>
+        </dl>
+        
+        <h2>Scope for safe taxonomic reduction</h2>
+        
+        <p>The following taxa can be safely deleted:</p>
+        
+        
+            
+            
+        
+        
+        
+            <ul>
+                
+                    <li>Quetzalcoatlus</li>
+                
+                    <li>Pteranodon_oregonensis</li>
+                
+            </ul>
+        
+
+    </div>
+    </div>
+    </body>
+</html>

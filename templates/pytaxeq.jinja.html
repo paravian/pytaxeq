@@ -1,0 +1,263 @@
+{% macro equivalents(mode=1) %}
+    <h2>Equivalents considering missing {% if mode == 1 %}entries only{% else %} <i>and</i> uninformative entries{% endif %}</h2>
+    
+    {% if mode == 1 %}
+        {% set equiv_array = equiv_missing.equivs %}
+        {% set matrix = matrices[0] %}
+    {% elif mode == 2 %}
+        {% set equiv_array = equiv_uninf.equivs %}
+        {% set matrix = matrices[1] %}
+    {% endif %}
+    
+    <table class="uk-table uk-table-striped uk-table-condensed">
+        <tr>
+            <th>Taxon</th>
+            <th>Missing characters</th>
+            <th>Equivalents</th>
+        </tr>
+        {% set missing = matrix.taxa_missing %}
+        {% for row in equiv_array %}
+            {% set taxa_idx = (row != "").nonzero()[0] %}
+            <tr>
+                <td>{{ matrix.taxa[loop.index0] }}</td>
+                <td>{{ "{0} ({1:.2%})".format(missing[loop.index0], missing[loop.index0] / matrix.nchar) }}</td>
+                <td>
+                    {% if taxa_idx.shape[0] %}
+                        {% for taxon in taxa_idx %}
+                            {{ "{0} ({1})".format(matrix.taxa[taxon], row[taxon]) }}
+                        {% endfor %}
+                    {% else %}
+                        Shows no equivalence
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endmacro %}
+
+{% macro statistics(mode=1) %}
+    {% set total_comparisons = matrices[0].nchar * matrices[0].ntax * (matrices[0].ntax - 1) %}
+    
+    {% if mode == 1 %}
+        {% set label = 'missing' %}
+        {% set freq_list = matrices[0].missing_entries %}
+        {% set invalid_pairs = equiv_missing.invalid_pairs %}
+    {% elif mode == 2 %}
+        {% set label = 'uninformative' %}
+        {% set freq_list = matrices[0].uninf_entries %}
+        {% set invalid_pairs = equiv_uninf.invalid_pairs %}
+        {% set uninf_invalid_pairs = invalid_pairs - equiv_missing.invalid_pairs %}
+    {% endif %}
+    
+    <h2>Statistics on missing data</h2>
+    
+    {% if mode == 1 %}
+    {% endif %}
+        <ul>
+        {% for frequency, missing_entries in freq_list %}
+            <li>
+                {% if frequency > 1 %}
+                    <b>{{ frequency }}</b> characters have 
+                {% else %}
+                    <b>{{ frequency }}</b> character has 
+                {% endif %}
+                {% if missing_entries > 1 %}
+                    <b>{{ missing_entries }}</b> {{ label }} entries
+                {% else %}
+                    <b>{{ missing_entries }}</b> {{ label }} entry
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+        
+    <p class="uk-margin-bottom-remove">
+        {% if mode == 1 %}
+            {% set entries = matrices[0].missing %}
+        {% elif mode == 2 %}
+            {% set entries = matrices[1].missing - matrices[0].missing %}
+        {% endif %}
+        Total number of entries: <b>{{ matrices[0].ntax * matrices[0].nchar }}</b>
+        <br>
+        Total number of {{ label }} entries: <b>{{ "{0} ({1:.2%})".format(entries, entries / (matrices[0].ntax * matrices[0].nchar)) }}</b>
+        <br>
+        Mean number of {{ label }} entries:
+    </p>
+    <ul class="uk-margin-top-remove">
+        <li><b>{{ "{0:.4}".format(entries / matrices[0].ntax) }} per taxon</b></li>
+        <li><b>{{ "{0:.4}".format(entries / matrices[0].nchar) }} per character</b></li>
+    </ul>
+    
+    <h3>Statistics on invalid comparisons due to {% if mode == 1 %}missing {% elif mode == 2 %}uninformative{% endif %} data</h3>
+    
+    <p>
+        Total number of comparisons: <b>{{ total_comparisons }}</b>
+        <br>
+        Total number of invalid comparisons: <b>
+        {% if mode == 1 %}
+            {{ "{0} ({1:.2%})".format(invalid_pairs, invalid_pairs / (total_comparisons)) }}
+        {% elif mode == 2 %}
+            {{ "{0} ({1:.2%})".format(uninf_invalid_pairs, uninf_invalid_pairs / (total_comparisons)) }}
+        {% endif %}
+        </b>
+    </p>
+    
+    {% if mode == 2 %}
+        <h3>Combined statistics on missing and uninformative data</h3>
+        
+        <p class="uk-margin-bottom-remove">
+            Total number of entries: <b>{{ matrices[0].ntax * matrices[0].nchar }}</b>
+            <br>
+            Total number of missing and uninformative entries: <b>{{ "{0} ({1:.2%})".format(matrices[1].missing, matrices[1].missing / (matrices[1].ntax * matrices[1].nchar)) }}</b>
+            <br>
+            Mean number of missing and uninformative entries:
+        </p>
+        <ul class="uk-margin-top-remove">
+            <li><b>{{ "{0:.4}".format(matrices[1].missing / matrices[0].ntax) }} per taxon</b></li>
+            <li><b>{{ "{0:.4}".format(matrices[1].missing / matrices[0].nchar) }} per character</b></li>
+        </ul>
+        <p>
+            Total number of comparisons: <b>{{ total_comparisons }}</b>
+            <br>
+            Total number of invalid comparisons: <b>{{ "{0} ({1:.2%})".format(invalid_pairs, invalid_pairs / (total_comparisons)) }}</b>
+            <br>
+        </p>
+    {% endif %}
+{% endmacro %}
+
+{% macro show_matrix(matrix) %}
+    <table class="uk-table uk-table-striped uk-table-condensed">
+        <tr>
+            <th>Taxon</th>
+            <th>Character states</th>
+        </tr>
+        {% for taxon in matrix.printable() %}
+            <tr>
+                <td>{{ matrix.taxa[loop.index0] }}</td>
+                <td>{{ taxon | join(" ") }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endmacro %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PyTaxEq results</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.19.0/css/uikit.gradient.min.css" />
+    </head>
+        
+    <body>
+        <div class="uk-container">
+        <div class="uk-width-2-3">
+        <h1>Data from <i>{{ matrices[0].description }}</i></h1>
+        <p>Checked for equivalence by PyTaxEq</p>
+        
+        <h2>Details of input file</h2>
+        <p>
+            Number of taxa: <b>{{ matrices[0].ntax }}</b>
+            <br>
+            Number of characters: <b>{{ matrices[0].ntax }}</b>
+        </p>
+        
+        <h2>Original data matrix</h2>
+        
+        {{ show_matrix(matrices[0]) }}
+
+        {{ statistics() }}
+        
+        {{ equivalents() }}
+        
+        <h2>Recoding uninformative data</h2>
+        
+        <h3>Uninformative codings</h3>
+        
+        {% if uninformative.recode %}
+            <table class="uk-table uk-table-striped uk-table-condensed">
+                <tr>
+                    <th>Taxon</th>
+                    <th>Character</th>
+                    <th>State</th>
+                </tr>
+                {% for recoded in uninformative.recode %}
+                    <tr>
+                        <td>{{ matrices[0].taxa[recoded.taxon] }}</td>
+                        <td>{{ recoded.character + 1 }}</td>
+                        <td>State {{ recoded.from }} uninformative, changed to
+                            {% if recoded.to %}{{ recoded.to }}{% else %}?{% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+        
+        {% if uninformative.replace %}
+            <h3>Characters with no parsimony-informative data (replaced with '?')</h3>
+            
+            <p>
+            {% for replaced in matrices[0].uninformative -%}
+                {% if loop.index0 %}, {% endif %}{{ replaced + 1 }}
+            {%- endfor %}
+            </p>
+        {% endif %}
+        
+        <h2>Modified data matrix</h2>
+        
+        {{ show_matrix(matrices[1]) }}
+        
+        {% if equiv_uninf %}
+            {{ statistics(mode=2) }}
+            
+            {{ equivalents(mode=2) }}
+        {% endif %}
+        
+        <h2>Key to taxonomic equivalence</h2>
+        
+        <h3>Equivalence scores</h3>
+        
+        <dl class="uk-description-list-horizontal">
+            <dt>A</dt>
+            <dd>Actual equivalents (symmetric)<br>Equivalent can be safely deleted if Index is retained</dd>
+            <dt>B</dt>
+            <dd>Potential equivalents (symmetric)<br>Equivalent can be safely deleted if Index is retained</dd>
+            <dt>C</dt>
+            <dd>Potential equivalents (asymmetric all one way)<br>Equivalent can be safely deleted if Index is retained</dd>
+            <dt>D</dt>
+            <dd>Potential equivalents (asymmetric both ways)<br>Cannot be safely deleted</dd>
+            <dt>E</dt>
+            <dd>Potential equivalents (asymmetric all one way)<br>Index can be safely deleted if equivalent is retained</dd>
+        </dl>
+        
+        <h3>Suffixes</h3>
+        
+        <dl class="uk-description-list-horizontal">
+            <dt>*</dt>
+            <dd>Equivalent taxon must originate from same node as Index taxon in any MPT (assuming no arbitrary resolutions)</dd>
+            <dt>!</dt><dd>Equivalent taxon has no informative data</dd>
+        </dl>
+        
+        <h2>Scope for safe taxonomic reduction</h2>
+        
+        <p>The following taxa can be safely deleted:</p>
+        
+        {% if equiv_uninf %}
+            {% set equivs = equiv_uninf %}
+            {% set matrix = matrices[1] %}
+        {% else %}
+            {% set equivs = equib_missing %}
+            {% set matrix = matrices[0] %}
+        {% endif %}
+        
+        {% if equivs.deletes %}
+            <ul>
+                {% for tax_id in equivs.deletes %}
+                    <li>{{ matrix.taxa[tax_id] }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No taxa can be safely deleted.</p>
+        {% endif %}
+
+    </div>
+    </div>
+    </body>
+</html>
